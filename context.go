@@ -4,6 +4,7 @@ import "net"
 
 type Context interface {
 	Logger() Logger
+	Conn() net.Conn
 
 	InjectLogger(Logger) Context
 	InjectConn(net.Conn) Context
@@ -22,6 +23,10 @@ func NewContext() Context {
 
 func (ctx *internalContext) Logger() Logger {
 	return ctx.logger
+}
+
+func (ctx *internalContext) Conn() net.Conn {
+	return ctx.conn
 }
 
 func (ctx *internalContext) InjectLogger(logger Logger) Context {
